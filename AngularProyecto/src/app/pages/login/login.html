@@ -1,0 +1,114 @@
+<div class="max-w-md mx-auto mt-10 p-8 bg-white shadow-lg rounded-xl border border-gray-200">
+
+  <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">
+    Adivina el número - Configuración del juego
+  </h2>
+
+  <form [formGroup]="form" (ngSubmit)="recogerDatos()" class="space-y-5">
+    <div class="flex flex-col">
+      <label class="font-medium text-gray-700 mb-1">Nombre</label>
+      <input type="text"
+             formControlName="nombre"
+             class="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 
+                    focus:ring-amber-500 transition">
+
+      <span class="text-sm mt-1 h-5"
+            [ngClass]="{
+              'text-red-600': nombre?.invalid && nombre?.touched,
+              'text-green-600': nombre?.valid
+            }">
+
+        <ng-container *ngIf="nombre?.invalid && nombre?.touched">
+          El nombre no puede estar vacío
+        </ng-container>
+
+        <ng-container *ngIf="nombre?.valid">
+          ✅
+        </ng-container>
+      </span>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="font-medium text-gray-700 mb-1">Apellido</label>
+      <input type="text"
+             formControlName="apellido"
+             class="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 
+                    focus:ring-amber-500 transition">
+
+      <span class="text-sm mt-1 h-5"
+            [ngClass]="{
+              'text-red-600': apellido?.invalid && apellido?.touched,
+              'text-green-600': apellido?.valid
+            }">
+
+        <ng-container *ngIf="apellido?.invalid && apellido?.touched">
+          El apellido no puede estar vacío
+        </ng-container>
+
+        <ng-container *ngIf="apellido?.valid">
+          ✅
+        </ng-container>
+      </span>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="font-medium text-gray-700 mb-1">Rango máximo del número alatorio (mínimo 4)</label>
+      <input type="number"
+             formControlName="rango"
+             class="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 
+                    focus:ring-amber-500 transition">
+
+      <span class="text-sm mt-1 h-5"
+            [ngClass]="{
+              'text-red-600': rango?.invalid && rango?.touched,
+              'text-green-600': rango?.valid
+            }">
+
+        <ng-container *ngIf="rango?.errors?.['min'] && rango?.touched">
+          El rango debe ser mínimo 4
+        </ng-container>
+
+        <ng-container *ngIf="rango?.valid">
+          ✅
+        </ng-container>
+      </span>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="font-medium text-gray-700 mb-1">Número de intentos</label>
+      <input type="number"
+             formControlName="intentos"
+             class="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 
+                    focus:ring-amber-500 transition">
+
+      <span class="text-sm mt-1 h-5"
+            [ngClass]="{
+              'text-red-600': intentos?.invalid && intentos?.touched,
+              'text-green-600': intentos?.valid
+            }">
+
+        <ng-container *ngIf="intentos?.errors?.['min'] && intentos?.touched">
+          El mínimo de intentos es 1
+        </ng-container>
+
+        <ng-container *ngIf="intentos?.valid">
+          ✅
+        </ng-container>
+      </span>
+    </div>
+
+    
+    <button type="submit"
+            [disabled]="form.invalid"
+            class="w-full py-2 rounded-lg font-semibold mt-4 cursor-pointer
+                   text-white transition 
+                   disabled:bg-gray-400 disabled:cursor-not-allowed
+                   bg-amber-600 hover:bg-amber-700">
+
+      Recoger datos
+    </button>
+
+  </form>
+</div>
+
+

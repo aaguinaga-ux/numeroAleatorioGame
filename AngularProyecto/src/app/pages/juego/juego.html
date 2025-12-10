@@ -1,0 +1,42 @@
+<div class="max-w-md mx-auto mt-10 p-8 bg-white shadow-xl rounded-xl border border-gray-200">
+
+  <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">
+    Ongi Etorri {{ nombre }} {{ apellido }}
+  </h2>
+
+  <div class="bg-blue-50 p-4 rounded-lg mb-5 text-gray-700">
+    <p><strong>Rango:</strong> 0 - {{ rango }}</p>
+    <p><strong>Intentos totales:</strong> {{ intentos }}</p>
+    <p><strong>Intentos restantes:</strong> {{ intentosRestantes }}</p>
+  </div>
+
+  <div class="flex flex-col mb-4">
+    <label class="font-semibold mb-1">Introduce tu número</label>
+    <input type="number"
+           [(ngModel)]="numeroIngresado"
+           [disabled]="intentosRestantes === 0 || mensaje === '🎉 Has Ganado'"
+           class="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 
+                  focus:ring-blue-600 transition">
+  </div>
+
+  <button (click)="enviarNumero()"
+          [disabled]="intentosRestantes === 0 || mensaje === '🎉 Has Ganado'"
+          class="w-full py-2 bg-green-600 hover:bg-green-700 text-white font-semibold 
+                 rounded-lg disabled:bg-gray-400 disabled:cursor-not-allowed transition">
+    Enviar
+  </button>
+
+  <div class="mt-5 text-center text-lg font-semibold"
+       [ngClass]="{
+          'text-green-700': mensaje.includes('Ganado'),
+          'text-red-600': mensaje.includes('perdido'),
+          'text-blue-600': mensaje === 'Te pasaste',
+          'text-yellow-600': mensaje === 'Caliente',
+          'text-orange-500': mensaje === 'Templado',
+          'text-indigo-600': mensaje === 'Frío'
+       }">
+    {{ mensaje }}
+  </div>
+
+</div>
+
